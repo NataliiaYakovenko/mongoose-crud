@@ -10,7 +10,8 @@
   "dependencies": {
     "express": "^4.21.2",
     "http-errors": "^2.0.0",
-    "mongoose": "^8.18.1"
+    "mongoose": "^8.18.1",
+    "yup": "^1.7.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
