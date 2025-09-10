@@ -1,0 +1,19 @@
+{
+  "development": {
+    "host": "locakhost",
+    "port": 27017,
+    "db_name": "users_db_development"
+  },
+  "test": {
+    "host": "locakhost",
+    "port": 27017,
+    "db_name": "users_db_test"
+  },
+  "production": {
+    "host": "locakhost",
+    "port": 27017,
+    "db_name": "users_db_production",
+    "user": "",
+    "password": ""
+  }
+}
