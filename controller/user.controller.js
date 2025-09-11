@@ -45,19 +45,32 @@ module.exports.updateUserById = async (req, res, next) => {
   const { userId } = req.params;
 
   try {
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).send('User not found');
+    const updatedUser = await User.findByIdAndUpdate(userId, body, {
+      new: true,     //показує тільки змінені рядки
+      runValidators: true,  //обов'язково прописувати, бо не спрацює валідатори
+    });
+    if (!updatedUser) {
+      return next(createHttpError(404, 'User not found'));
     }
-
-    await user.updateOne(body);
-    return res.status(201).send({ data: user });
+    return res.status(201).send({ data: updatedUser });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports.deleteUserById = async (req, res, next) => {};
+module.exports.deleteUserById = async (req, res, next) => {
+  const { userId } = req.params;
+
+  try {
+    const deleteUserById = await User.findByIdAndDelete(userId);
+    if (!deleteUserById) {
+      return next(createHttpError(404, 'User not found'));
+    }
+    return res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports.createUserPost = async (req, res, next) => {};
 
