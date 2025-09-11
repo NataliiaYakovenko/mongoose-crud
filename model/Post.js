@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ref } = require('yup');
 
 const postSchema = new mongoose.Schema(
   {
@@ -9,6 +10,7 @@ const postSchema = new mongoose.Schema(
     },
     userId: {
       type: mongoose.ObjectId,
+      ref: 'User'
     },
   },
   {
