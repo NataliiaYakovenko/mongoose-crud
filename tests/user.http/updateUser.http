@@ -1,0 +1,12 @@
+PATCH http://localhost:5000/api/users/68c27816126f51a1f861ca30
+Content-Type: application/json
+
+{
+    "firstName": "Nata",
+    "lastNmame": "Yakov",
+    "email": "nata806@gmail.com",
+    "birthday": "1983-10-14",
+    "workExperience": 19,
+    "gender": "female",
+    "isMarried": false
+}
