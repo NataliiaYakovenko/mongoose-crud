@@ -8,3 +8,4 @@ mongoose
   .catch((error) => console.log(error));
 
 module.exports.User = require('./User');
+module.exports.Post = require('./Post');

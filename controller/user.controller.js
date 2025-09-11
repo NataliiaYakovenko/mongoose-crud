@@ -1,4 +1,6 @@
-const { User } = require('./../model');
+const createHttpError = require('http-errors');
+const { User, Post } = require('./../model');
+const { default: mongoose } = require('mongoose');
 
 module.exports.createUser = async (req, res, next) => {
   const { body } = req;
@@ -46,8 +48,8 @@ module.exports.updateUserById = async (req, res, next) => {
 
   try {
     const updatedUser = await User.findByIdAndUpdate(userId, body, {
-      new: true,     //показує тільки змінені рядки
-      runValidators: true,  //обов'язково прописувати, бо не спрацює валідатори
+      new: true, //показує тільки змінені рядки
+      runValidators: true, //обов'язково прописувати, бо не спрацює валідатори
     });
     if (!updatedUser) {
       return next(createHttpError(404, 'User not found'));
@@ -72,6 +74,28 @@ module.exports.deleteUserById = async (req, res, next) => {
   }
 };
 
-module.exports.createUserPost = async (req, res, next) => {};
+module.exports.createUserPost = async (req, res, next) => {
+  const {
+    body,
+    params: { userId },
+  } = req;
+
+  try {
+    const foubdUser = await User.findById(userId);
+
+    if (!foubdUser) {
+      return next(createHttpError(404, 'User not found'));
+    }
+    const newPost = { ...body, userId: new mongoose.Types.ObjectId(userId) };
+
+    const createdPost = await Post.create(newPost);
+    if (!createdPost) {
+      return next(createHttpError(400, 'Body not created'));
+    }
+    return res.status(201).send({ data: createdPost });
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports.getUserPosts = async (req, res, next) => {};
