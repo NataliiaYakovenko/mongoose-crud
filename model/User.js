@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const yup = require('yup');
 
-const EMAIL_VALIDATION_SCHEMA = yup.object({
-  email: yup.string().email(),
-});
+const EMAIL_VALIDATION_SCHEMA = yup.string().email();
 
 const userSchema = new mongoose.Schema(
   {
@@ -38,6 +36,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-const User = mongoose.Model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

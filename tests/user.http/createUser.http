@@ -1,0 +1,12 @@
+POST http://localhost:5000/api/users
+Content-Type: application/json
+
+{
+    "firstName": "Nataliia",
+    "lastNmame": "Yakovenko",
+    "email": "nata66@gmail.com",
+    "birthday": "1983-10-14",
+    "workExperience": 19,
+    "gender": "female",
+    "isMarried": false
+}
